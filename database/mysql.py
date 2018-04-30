@@ -3,6 +3,7 @@ import MySQLdb
 import os
 from ConfigParser import SafeConfigParser
 
+
 def connection():
     # Connect to mysql
     config = SafeConfigParser()
@@ -20,6 +21,7 @@ def connection():
         return -1
     return db
 
+
 def return_row(sql_str):
     db = connection()
     #Build cursor
@@ -35,6 +37,7 @@ def return_row(sql_str):
     except:
         return -1
     return data
+
 
 def insert(sql_str):
     rc = 0
@@ -55,9 +58,24 @@ def insert(sql_str):
     return rc
 
 
+def insert_get_id(sql_str):
+    db = connection()
+    # Build cursor
+    cursor = db.cursor()
+    try:
+        # Execute the SQL
+        cursor.execute(sql_str)
 
+        db.commit()
+        last_row_id = cursor.lastrowid
+    except:
+        # MySQL return error
+        db.rollback()
+        print "MySQL insert failed"
 
-connection()
+    db.close()
+    return last_row_id
+
 
 
 
