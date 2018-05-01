@@ -11,7 +11,7 @@ has_unicode = True
 DEBUG = True
 
 api_data = poll_remote_api.json_api.poll_json(url, has_unicode)
-pprint.pprint(api_data)
+# pprint.pprint(api_data)
 
 # get pool_website_id
 try:
@@ -36,7 +36,8 @@ for algo in api_data:
     algo_est_last24 = api_data[algo]['estimate_last24h']
     algo_act_last24 = api_data[algo]['actual_last24h']
     coin = data_storage.data_store.payout_histroy
-    pprint.pprint(coin)
+
+pprint.pprint(coin.algo_name)
 
 #    save_data = mysql_ethos_manager.mining_site_payout_history.insert(pool_website_id, pool_api_request_id, algo_name, algo_fee, algo_est_cur, algo_est_last24, algo_act_last24)
 #    if type(save_data) is int:
