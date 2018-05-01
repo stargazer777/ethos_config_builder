@@ -1,4 +1,4 @@
-# Connect to MySQL database
+# Connect to MySQL data_storage
 import MySQLdb
 import os
 from ConfigParser import SafeConfigParser
@@ -14,7 +14,6 @@ def connection():
     db_schema = config.get('ethos_manager', 'db_schema')
 
     try:
-
         db = MySQLdb.connect(db_host, db_user, db_pass, db_schema)
     except:
         print "MySQL login failed"

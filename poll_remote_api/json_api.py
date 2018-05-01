@@ -1,4 +1,4 @@
-# Pull data from json source
+# Pull data_storage from json source
 import urllib2
 import json
 import ast
