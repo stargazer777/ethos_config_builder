@@ -23,12 +23,7 @@ def insert_zpool(algo_name):
     website_name = "zpool"
     pool_api_suffix = ""
     pool_value_multi = 1000000
-    import poll_remote_api.json_api
     import pool_website
-    import algo
-
-
-
 
     #build_mining_url
     pool_mining_url = algo_name + "." + pool_website.get_mining_url_by_name(website_name)

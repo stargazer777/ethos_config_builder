@@ -1,5 +1,4 @@
 #This module is to interact with the MySQL Table algo
-import data_storage.mysql
 
 def get_id_by_name(algo_name):
     sql_str = "SELECT algo_id FROM algo WHERE algo_name = '" + algo_name + "';"
