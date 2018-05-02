@@ -41,12 +41,12 @@ for algo in api_data:
     algo_act_last24 = api_data[algo]['actual_last24h']
 
     #write to object
-    algo_obj.algo_name = algo_name
+    algo_obj.set_zpool_api_v(algo_act_last24, algo_name, algo_est_cur, algo_est_last24, algo_fee, algo_port, pool_name)
     algo_dict[algo_name] = algo_obj
 
 # pprint.pprint(algo_dict)
 # print "-----"
-# pprint.pprint(algo_dict["c11"].algo_name)
+# pprint.pprint(algo_dict["c11"].pool_fee)
 
 #    save_data = mysql_ethos_manager.mining_site_payout_history.insert(pool_website_id, pool_api_request_id, algo_name, algo_fee, algo_est_cur, algo_est_last24, algo_act_last24)
 #    if type(save_data) is int:
