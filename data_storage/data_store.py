@@ -1,32 +1,19 @@
 class payout_histroy:
     """" This class is to be used to store Algo data_storage before storing it into the database """
-    act_last24h = None
-    algo_id = None
-    algo_name = None
-    est_current = None
-    est_last24h = None
-    pool_api_request_id = None
-    pool_fee = None
-    pool_mining_site_id = None
-    pool_mining_url = None
-    pool_value_multi = 1000000
-    pool_website_id = None
-    pool_website_name = None
 
-    def __init__(self, act_last24h, algo_id, algo_name, est_current, est_last24h, pool_api_request_id, pool_fee,
-                 pool_mining_site_id, pool_mining_url, pool_value_multi,  pool_website_id, pool_website_name):
-        self.act_last24h = act_last24h
-        self.algo_id = algo_id
-        self.algo_name = algo_name
-        self.est_current = est_current
-        self.est_last24h = est_last24h
-        self.pool_api_request_id = pool_api_request_id
-        self.pool_fee = pool_fee
-        self.pool_mining_site_id = pool_mining_site_id
-        self.pool_mining_url = pool_mining_url
-        self.pool_value_multi = pool_value_multi
-        self.pool_website_id = pool_website_id
-        self.pool_website_name = pool_website_name
+    def __init__(self):
+        self.act_last24h = None
+        self.algo_id = None
+        self.algo_name = None
+        self.est_current = None
+        self.est_last24h = None
+        self.pool_api_request_id = None
+        self.pool_fee = None
+        self.pool_mining_site_id = None
+        self.pool_mining_url = None
+        self.pool_value_multi = 1000000
+        self.pool_website_id = None
+        self.pool_website_name = None
 
     def set_algo(self, algo_name):
         import mysql_ethos_manager.algo
