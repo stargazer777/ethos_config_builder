@@ -2,31 +2,38 @@ def start_poll():
     # run this poller to import zpool.ca data_storage.
     import poll_remote_api.json_api
     import data_storage.data_store
-    import pprint
+    import mysql_ethos_manager.pool_website
+    import mysql_ethos_manager.pool_api_request
+    import mysql_ethos_manager.mining_site_payout_history
 
     pool_name = "zpool"
-    url = "https://www.zpool.ca/api/status"
+    pool_url = "http://www.zpool.ca"
+    pool_api_url = "https://www.zpool.ca/api/status"
     has_unicode = True
     DEBUG = True
 
-    api_data = poll_remote_api.json_api.poll_json(url, has_unicode)
-    # pprint.pprint(api_data)
-
     # get pool_website_id
     try:
-        pool_website_id = 1
-        # pool_website_id = mysql_ethos_manager.pool_website.get_id_by_name(pool_name)
+        pool_website_id = mysql_ethos_manager.pool_website.get_id_by_name(pool_name)
     except:
         print "Error looking up pool_website_id"
-        exit(1)
+        print "Adding " + pool_name +  " to pool_website table"
+        try:
+            pool_website_id = mysql_ethos_manager.pool_website.get_new_pool_website(pool_name, pool_url, pool_api_url)
+        except:
+            print "Pool Website insert failed. "
+            exit(1)
 
     # get pool_api_request_id
     try:
-        pool_api_request_id = 1
-        # pool_api_request_id = mysql_ethos_manager.pool_api_request.get_new_id(pool_website_id)
+        # pool_api_request_id = 1
+        pool_api_request_id = mysql_ethos_manager.pool_api_request.get_new_id(pool_website_id)
     except:
         print "Error getting new api_request_id"
         exit(1)
+
+    api_data = poll_remote_api.json_api.poll_json(pool_api_url, has_unicode)
+    # pprint.pprint(api_data)
 
     rows_added = 0
     algo_dict = {}
@@ -43,11 +50,14 @@ def start_poll():
         algo_obj.set_zpool_api_v(algo_act_last24, algo_name, algo_est_cur, algo_est_last24, algo_fee, algo_port,
                                  pool_name, pool_api_request_id)
 
-        # rows_added += algo_obj.save()
+
+
+        rows_added += algo_obj.save()
         algo_dict[algo_name] = algo_obj
 
+    return(rows_added)
 
-    pprint.pprint(algo_dict)
+    #pprint.pprint(algo_dict)
     # print "-----"
     # pprint.pprint(algo_dict["c11"].pool_fee)
 

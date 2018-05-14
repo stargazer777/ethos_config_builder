@@ -24,3 +24,10 @@ def get_api_url_by_name(pool_name):
     data = data_storage.mysql.return_row(sql_str)
     pool_api_url = data[0]
     return pool_api_url
+
+def get_new_pool_website(pool_name, pool_url, pool_api_url):
+    sql_str = "INSERT INTO pool_website (pool_name, pool_url, pool_api_url) "
+    sql_str += "VALUES ('" + pool_name + "', '" + pool_url + "', '" + pool_api_url + "');"
+
+    pool_website_id = data_storage.mysql.insert_get_id(sql_str)
+    return pool_website_id

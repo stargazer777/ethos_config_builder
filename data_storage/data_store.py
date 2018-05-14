@@ -27,11 +27,14 @@ class payout_histroy:
         self.pool_mining_port = pool_mining_port
         self.pool_website_name = pool_website_name
         self.pool_api_request_id = pool_api_request_id
-        #
-        # self.set_algo_id(algo_name)
-        # self.set_website_id(pool_website_name)
+        self.set_algo_id()
+        self.set_website_id()
+        self.set_mining_pool_site_id()
+        # TODO pool_mining_site_id
+        self.set_zpool_mining_url()
 
-    def set_algo_id(self,loop_id=0):
+
+    def set_algo_id(self):
         import mysql_ethos_manager.algo
         if self.algo_name == None:
             print "no algo name has been set for this object"
@@ -41,32 +44,46 @@ class payout_histroy:
                 algo_id = mysql_ethos_manager.algo.get_id_by_name(self.algo_name)
                 self.algo_id = algo_id
             except:
-                print "Missing algo_id for  : " + self.algo_name
-                #todo add missing algo id and try again.
-                if loop_id == 0:
-                    loop_id += 1
-                    self.set_algo_id(loop_id)
-                else:
-                    return 1
+                print "Missing algo_id for : " + self.algo_name
+                print "Adding Missing Algo  - " + self.algo_name
+                try:
+                    algo_id = mysql_ethos_manager.algo.put_new_algo(self.algo_name)
+                    self.algo_id = algo_id
+                except:
+                    print "Adding Missing Algo Failed"
 
-    def set_website_id(self, website_name):
+
+
+    def set_website_id(self):
         import mysql_ethos_manager.pool_website
         # get pool_website_id
-        pool_website_id = mysql_ethos_manager.pool_website.get_id_by_name(website_name)
-        if type(pool_website_id) == int:
-            self.pool_website_id = pool_website_id
+        try:
+            pool_website_id = mysql_ethos_manager.pool_website.get_id_by_name(self.pool_website_name)
+        except:
+            print "Unable to find website id - " + self.pool_website_name
+        self.pool_website_id = pool_website_id
 
-    def get_mining_url(self, website_name, algo_name):
+    def set_mining_pool_site_id(self):
+        import mysql_ethos_manager.pool_mining_site
+        #TODO Make this work
+        self.pool_mining_site_id=1
+
+    def set_zpool_mining_url(self):
         import mysql_ethos_manager.pool_website
-        self.pool_mining_url = algo_name + "." + mysql_ethos_manager.pool_website.get_mining_url_by_name(website_name)
+        self.pool_mining_url = self.algo_name + "." + mysql_ethos_manager.pool_website.get_mining_url_by_name(self.pool_website_name)
 
-
-    def save(self, database):
+    def save(self):
+        import mysql_ethos_manager.mining_site_payout_history
         # insert into mysql - mining_site_payout_history
-        rows_inserted = mysql_ethos_manager.mining_site_payout_history.insert(pool_api_request_id,
-                                                                             self.pool_api_request_id,
-                                                                             self.pool_mining_site_id, pool_fee,
-                                                                             est_current, est_last_24h, act_last24h)
+        try:
+            rows_inserted = mysql_ethos_manager.mining_site_payout_history.insert(self.pool_api_request_id,
+                                                                                  self.algo_id,
+                                                                                  self.pool_mining_site_id,
+                                                                                  self.pool_fee, self.est_current,
+                                                                                  self.est_last24h,
+                                                                                  self.act_last24h)
+        except:
+            print "Insert failed for mining_site_payout_history "
         return rows_inserted
 
 

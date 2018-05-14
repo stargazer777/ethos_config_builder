@@ -6,20 +6,38 @@ from ConfigParser import SafeConfigParser
 
 def connection():
     # Connect to mysql
+    myconf_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)), 'config', 'mysql_config.ini')
+    ethos_manger_value = ['ethos_manager']
+
     config = SafeConfigParser()
-    config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), '..\config\mysql_config.ini'))
-    db_host = config.get('ethos_manager', 'db_host')
-    db_user = config.get('ethos_manager', 'db_user')
-    db_pass = config.get('ethos_manager', 'db_pass')
-    db_schema = config.get('ethos_manager', 'db_schema')
+    config.read(myconf_path)
+
+    if config.has_section('ethos_manager'):
+        try:
+            db_host = config.get('ethos_manager', 'db_host')
+        except:
+            print "db_host could not be found in config."
+        try:
+            db_user = config.get('ethos_manager', 'db_user')
+        except:
+            print "db_user could not be found in config"
+        try:
+            db_pass = config.get('ethos_manager', 'db_pass')
+        except:
+            print "db_pass could not be found in config"
+        try:
+            db_schema = config.get('ethos_manager', 'db_schema')
+        except:
+            print "db_schema could not be found in config"
+    else:
+        print "Invalid Config File - mysql_config.ini"
 
     try:
         db = MySQLdb.connect(db_host, db_user, db_pass, db_schema)
     except:
         print "MySQL login failed"
-        return -1
-    return db
 
+    return db
 
 def return_row(sql_str):
     db = connection()
@@ -48,10 +66,10 @@ def insert(sql_str):
         cursor.execute(sql_str)
         rc = cursor.rowcount
         db.commit()
-    except:
+    except (MySQLdb.Error, MySQLdb.Warning) as e:
         #MySQL return error
         db.rollback()
-        print "MySQL insert failed"
+        print "MySQL insert failed: e"
 
     db.close()
     return rc
