@@ -55,6 +55,21 @@ def return_row(sql_str):
         return -1
     return data
 
+def return_array(sql_str):
+    db = connection()
+    #Build cursor
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql_str)
+    except:
+        print "Error MySQL object failed"
+        return -1
+    try:
+        data = cursor.fetchall()
+    except:
+        return -1
+    return data
+
 
 def insert(sql_str):
     rc = 0
@@ -82,7 +97,6 @@ def insert_get_id(sql_str):
     try:
         # Execute the SQL
         cursor.execute(sql_str)
-
         db.commit()
         last_row_id = cursor.lastrowid
     except:

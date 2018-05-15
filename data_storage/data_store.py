@@ -35,8 +35,6 @@ class payout_histroy:
         self.set_website_id()
         self.set_zpool_mining_url()
         self.set_mining_pool_site_id()
-        # TODO pool_mining_site_id
-
 
     def set_algo_id(self):
         import mysql_ethos_manager.algo
@@ -55,8 +53,6 @@ class payout_histroy:
                     self.algo_id = algo_id
                 except:
                     print "Adding Missing Algo Failed"
-
-
 
     def set_website_id(self):
         import mysql_ethos_manager.pool_website

@@ -26,7 +26,6 @@ def start_poll():
 
     # get pool_api_request_id
     try:
-        # pool_api_request_id = 1
         pool_api_request_id = mysql_ethos_manager.pool_api_request.get_new_id(pool_website_id)
     except:
         print "Error getting new api_request_id"
