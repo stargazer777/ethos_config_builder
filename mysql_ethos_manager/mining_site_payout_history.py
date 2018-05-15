@@ -9,9 +9,7 @@ def insert(pool_api_request_id, algo_id, pool_mining_site_id, algo_fee, algo_est
     sql_str += "VALUES (" + str(pool_api_request_id) + "," + str(algo_id) + "," + str(pool_mining_site_id) + ","
     sql_str += str(algo_fee) + "," + str(algo_est_cur) + "," + str(algo_est_last24) + "," + str(algo_act_last24)+ ");"
 
-    # Build data_storage connection
-
-    print sql_str
+    # data to database
     rows_inserted = data_storage.mysql.insert(sql_str)
     return rows_inserted
 

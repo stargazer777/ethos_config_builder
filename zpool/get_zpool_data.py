@@ -7,8 +7,8 @@ def start_poll():
     import mysql_ethos_manager.mining_site_payout_history
 
     pool_name = "zpool"
-    pool_url = "http://www.zpool.ca"
-    pool_api_url = "https://www.zpool.ca/api/status"
+    pool_url = "zpool.ca"
+    pool_api_url = "zpool.ca/api/status"
     has_unicode = True
     DEBUG = True
 
@@ -32,7 +32,9 @@ def start_poll():
         print "Error getting new api_request_id"
         exit(1)
 
-    api_data = poll_remote_api.json_api.poll_json(pool_api_url, has_unicode)
+    full_api_url = "http://www." + pool_api_url
+    print full_api_url
+    api_data = poll_remote_api.json_api.poll_json(full_api_url, has_unicode)
     # pprint.pprint(api_data)
 
     rows_added = 0
@@ -50,33 +52,11 @@ def start_poll():
         algo_obj.set_zpool_api_v(algo_act_last24, algo_name, algo_est_cur, algo_est_last24, algo_fee, algo_port,
                                  pool_name, pool_api_request_id)
 
-
-
         rows_added += algo_obj.save()
         algo_dict[algo_name] = algo_obj
 
     return(rows_added)
 
-    #pprint.pprint(algo_dict)
+    # pprint.pprint(algo_dict)
     # print "-----"
     # pprint.pprint(algo_dict["c11"].pool_fee)
-
-    #    save_data = mysql_ethos_manager.mining_site_payout_history.insert(pool_website_id, pool_api_request_id, algo_name, algo_fee, algo_est_cur, algo_est_last24, algo_act_last24)
-    #    if type(save_data) is int:
-    #        rows_added += int(save_data)
-    #    elif type(save_data) is str:
-    #        if save_data == "Missing_Site":
-    #            import mysql_ethos_manager.pool_mining_site
-    #            mysql_ethos_manager.pool_mining_site.insert_zpool(algo_name)
-    #            save_data = mysql_ethos_manager.mining_site_payout_history.insert(pool_website_id, pool_api_request_id, algo_name, algo_fee, algo_est_cur, algo_est_last24, algo_act_last24)
-    #            if save_data is int:
-    #                rows_added += int(save_data)
-    #                print "Added Algo " + algo_name + " to pool_mining_site"
-    #            else:
-    #                print "Failed to insert " + algo_name
-
-    #if int(rows_added) == 0:
-    #    sys.exit(1)
-    #else:
-    #    print "records inserted: " + str(rows_added)
-    #    sys.exit(0)
