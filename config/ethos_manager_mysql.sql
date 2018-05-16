@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `ethos_manager`
 --
-CREATE DATABASE IF NOT EXISTS `ethos_manager` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `ethos_manager` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE `ethos_manager`;
 
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ USE `ethos_manager`;
 CREATE TABLE `algo` (
   `algo_id` bigint(20) UNSIGNED NOT NULL,
   `algo_name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `algo`:
@@ -50,7 +50,7 @@ CREATE TABLE `coin` (
   `coin_name` varchar(120) NOT NULL,
   `coin_short` varchar(10) NOT NULL,
   `algo_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `coin`:
@@ -69,7 +69,7 @@ CREATE TABLE `coin_wallet` (
   `coin_id` bigint(20) UNSIGNED NOT NULL,
   `coin_wallet_name` varchar(120) NOT NULL,
   `coin_wallet_value` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `coin_wallet`:
@@ -87,7 +87,7 @@ CREATE TABLE `ethos_mac` (
   `ethos_mac_id` bigint(20) UNSIGNED NOT NULL,
   `ethos_mac_value` char(6) NOT NULL,
   `mining_rig_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `ethos_mac`:
@@ -104,7 +104,7 @@ CREATE TABLE `ethos_mac` (
 CREATE TABLE `ethos_ver` (
   `ethos_ver_id` bigint(20) UNSIGNED NOT NULL,
   `ethos_ver_name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `ethos_ver`:
@@ -121,7 +121,7 @@ CREATE TABLE `global_site_value` (
   `mining_site_id` bigint(20) UNSIGNED NOT NULL,
   `value_name` varchar(120) NOT NULL,
   `value_value` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `global_site_value`:
@@ -139,7 +139,7 @@ CREATE TABLE `hardware` (
   `hardware_id` bigint(20) UNSIGNED NOT NULL,
   `hardware_name` varchar(120) NOT NULL,
   `hardware_type_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `hardware`:
@@ -159,7 +159,7 @@ CREATE TABLE `hardware_hashrate` (
   `hardware_id` bigint(20) UNSIGNED NOT NULL,
   `algo_id` bigint(20) UNSIGNED NOT NULL,
   `hashrate_value` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `hardware_hashrate`:
@@ -180,7 +180,7 @@ CREATE TABLE `hardware_hashrate` (
 CREATE TABLE `hardware_type` (
   `hardware_type_id` bigint(20) UNSIGNED NOT NULL,
   `hardware_type_name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `hardware_type`:
@@ -196,7 +196,7 @@ CREATE TABLE `matix_algo-mining_software` (
   `matrix_algo-mining_software_id` bigint(20) UNSIGNED NOT NULL,
   `algo_id` bigint(20) UNSIGNED NOT NULL,
   `mining_software_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `matix_algo-mining_software`:
@@ -218,7 +218,7 @@ CREATE TABLE `matix_ethos_ver-miner` (
   `ethos_ver_id` bigint(20) UNSIGNED NOT NULL,
   `miner_id` bigint(20) UNSIGNED NOT NULL,
   `mining_software_value` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `matix_ethos_ver-miner`:
@@ -239,7 +239,7 @@ CREATE TABLE `matix_hardware-mining_rig` (
   `matrix_hardware-mining_rig_name` varchar(120) NOT NULL,
   `hardware_id` bigint(20) UNSIGNED NOT NULL,
   `minging_rig_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `matix_hardware-mining_rig`:
@@ -259,7 +259,7 @@ CREATE TABLE `matrix_pool_mining_site-pool_mining_site` (
   `matrix_pool_mining_site-pool_mining_site_id` bigint(20) UNSIGNED NOT NULL,
   `pool_mining_site_id` bigint(20) UNSIGNED NOT NULL,
   `mining_site_cred_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `matrix_pool_mining_site-pool_mining_site`:
@@ -282,7 +282,7 @@ CREATE TABLE `mining_rig` (
   `ethos_ver` bigint(20) UNSIGNED NOT NULL,
   `mining_site_id` bigint(20) UNSIGNED NOT NULL,
   `mining_rig_config_url` varchar(250) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `mining_rig`:
@@ -301,7 +301,7 @@ CREATE TABLE `mining_rig` (
 CREATE TABLE `mining_site` (
   `mining_site_id` bigint(20) UNSIGNED NOT NULL,
   `mining_site_name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `mining_site`:
@@ -319,7 +319,7 @@ CREATE TABLE `mining_site_cred` (
   `cred_name` varchar(120) NOT NULL,
   `mining_site_username` varchar(120) NOT NULL,
   `mining_site_pass` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `mining_site_cred`:
@@ -342,7 +342,7 @@ CREATE TABLE `mining_site_payout_history` (
   `current` double(15,9) NOT NULL,
   `est_last24h` double(15,9) NOT NULL,
   `act_last24h` double(15,9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `mining_site_payout_history`:
@@ -364,7 +364,7 @@ CREATE TABLE `mining_software` (
   `mining_software_id` bigint(20) UNSIGNED NOT NULL,
   `ethos_ver_id` bigint(20) UNSIGNED NOT NULL,
   `ethos_miner_name` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `mining_software`:
@@ -382,7 +382,7 @@ CREATE TABLE `pool_api_request` (
   `pool_api_request_id` bigint(20) UNSIGNED NOT NULL,
   `pool_website_id` bigint(20) UNSIGNED NOT NULL,
   `pool_api_timestamp` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `pool_api_request`:
@@ -402,7 +402,7 @@ CREATE TABLE `pool_mining_site` (
   `pool_mining_port` int(11) NOT NULL,
   `pool_api_suffix` varchar(250) NOT NULL,
   `pool_value_mult` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `pool_mining_site`:
@@ -423,7 +423,7 @@ CREATE TABLE `pool_website` (
   `pool_name` varchar(120) NOT NULL,
   `pool_url` varchar(250) NOT NULL,
   `pool_api_url` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- RELATIONSHIPS FOR TABLE `pool_website`:

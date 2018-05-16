@@ -107,6 +107,25 @@ def insert_get_id(sql_str):
     db.close()
     return last_row_id
 
+def delete_row(sql_str):
+    db = connection()
+    # Build cursor
+    cursor = db.cursor()
+    try:
+        # Execute the SQL
+        cursor.execute(sql_str)
+        db.commit()
+        rows_deleted = cursor.rowcount
+    except:
+        # MySQL return error
+        db.rollback()
+        print "MySQL delete failed"
+        rows_deleted = -1
+
+    db.close()
+    return rows_deleted
+
+
 
 
 

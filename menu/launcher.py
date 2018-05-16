@@ -1,6 +1,8 @@
 
 def main_menu():
+    import menu.display
     menu_value = None
+    menu.display.clear_screen()
     """This is the class for the main menu"""
     print "Please select one of the following items you would like to run."
     print '-' * 10
@@ -11,14 +13,7 @@ def main_menu():
     print "0 - Exit"
     print '=' * 10
 
-    is_valid = 0
-    while not is_valid:
-        try:
-            menu_value = int(raw_input('Select Option: '))
-            is_valid = 1
-        except :
-            print "That is not a number.\n"
-            main_menu()
+    menu_value = menu.display.select_int()
 
     # Process Menu Selection
     if menu_value == 0:
@@ -27,11 +22,9 @@ def main_menu():
         import menu.mining_site.sub_menu
         menu.mining_site.sub_menu.sub_menu()
         main_menu()
-    if menu_value == 2:
-        print "Yea " + str(menu_value)
-
     else:
         print "  " + str(menu_value) + " is not an available option."
+        raw_input("Press Enter to Continue ...")
         main_menu()
 
     print menu_value
