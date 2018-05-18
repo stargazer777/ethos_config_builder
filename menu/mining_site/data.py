@@ -24,13 +24,6 @@ def add_site():
     import menu.display
     import mysql_ethos_manager.mining_site
     menu.display.clear_screen()
-    try:
-        mining_site_name = raw_input('Name of new site: ')
-    except:
-        print "Invaild Name. \n"
-        raw_input("Press Enter to Continue ...")
-        add_site()
-
     mysql_ethos_manager.mining_site.set_new_site(mining_site_name)
     return 0
 

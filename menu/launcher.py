@@ -22,6 +22,10 @@ def main_menu():
         import menu.mining_site.sub_menu
         menu.mining_site.sub_menu.sub_menu()
         main_menu()
+    if menu_value == 2:
+        import menu.mining_rig.sub_menu
+        menu.mining_rig.sub_menu.sub_menu()
+        main_menu()
     else:
         print "  " + str(menu_value) + " is not an available option."
         raw_input("Press Enter to Continue ...")

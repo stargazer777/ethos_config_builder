@@ -10,6 +10,7 @@ def clear_screen():
         os.system('clear')
     return()
 
+
 def select_int():
     is_valid = 0
     while not is_valid:
@@ -19,4 +20,13 @@ def select_int():
         except :
             print "That is not a number.\n"
             raw_input("Press Enter to Continue ...")
+    return menu_value
+
+
+def text_line(title, value_default=None):
+    try:
+        menu_value = raw_input(title) or value_default
+    except:
+        print "Invaild Name. \n"
+        raw_input("Press Enter to Continue ...")
     return menu_value

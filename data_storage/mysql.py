@@ -84,8 +84,8 @@ def insert(sql_str):
     except (MySQLdb.Error, MySQLdb.Warning) as e:
         #MySQL return error
         db.rollback()
-        print "MySQL insert failed: e"
-
+        print "MySQL insert failed:" + str(e.args[0]) + str(e.args[1])
+        raw_input("Press Enter to Continue ...")
     db.close()
     return rc
 
@@ -99,10 +99,12 @@ def insert_get_id(sql_str):
         cursor.execute(sql_str)
         db.commit()
         last_row_id = cursor.lastrowid
-    except:
+    except (MySQLdb.Error, MySQLdb.Warning) as e:
         # MySQL return error
         db.rollback()
-        print "MySQL insert failed"
+        print "MySQL insert failed:" + str(e.args[0]) + str(e.args[1])
+        raw_input("Press Enter to Continue ...")
+        last_row_id = -1
 
     db.close()
     return last_row_id
